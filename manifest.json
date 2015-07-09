@@ -12,7 +12,7 @@
 		"default_title": "Don't Stop the Music"
 	},
 	"background":{
-		"scripts": ["popup.js"]
+		"scripts": ["background.js"]
 	},
 	"content_scripts":[
 		{
