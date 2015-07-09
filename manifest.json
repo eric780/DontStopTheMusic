@@ -6,11 +6,7 @@
 	"description": "Detects when you are closing a tab with audio playing, and warns you.",
 
 	"version": "1.0",
-
-	"browser_action": {
-		"default_icon": "icon.png",
-		"default_title": "Don't Stop the Music"
-	},
+	
 	"background":{
 		"scripts": ["background.js"]
 	},
