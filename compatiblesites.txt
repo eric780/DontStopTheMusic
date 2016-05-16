@@ -1,4 +1,0 @@
-youtube.com
-soundcloud.com
-pandora.com
-play.spotify.com (injects no matter what)

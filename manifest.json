@@ -13,7 +13,7 @@
 	"content_scripts":[
 		{
 			"matches": ["http://*/", "https://*/", "*://*/", "<all_urls>"],
-			"js": ["script.js"]
+			"js": ["contentScript.js"]
 		}
 	],
 	"permissions":[
@@ -27,7 +27,7 @@
 		"webRequestBlocking"
 	],
 
-	"web_accessible_resources": ["notification.js"]
+	"web_accessible_resources": ["notification.js", "removeNotification.js"]
 	
 
 }
