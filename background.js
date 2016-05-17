@@ -26,10 +26,9 @@ chrome.tabs.onActivated.addListener(function(activeInfo){
         }
     });
 
+    // remove notification from tab we switch to
     var tab = chrome.tabs.get(activeInfo.tabId);
-    if (tab.audible) { // if we switched to a tab that's audible, remove notification
-        removeNotification(tab.id); 
-    }
+    removeNotification(tab.id); 
     
 });
 
