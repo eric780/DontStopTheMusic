@@ -17,7 +17,6 @@ chrome.runtime.onMessage.addListener(
 });
 
 
-
 function attachNotification(){
 	var script = document.createElement('script');
 	script.src = chrome.extension.getURL('notification.js');
