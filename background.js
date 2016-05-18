@@ -16,6 +16,16 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeinfo, tab) {
 });
 */
 
+
+var audibleFalse = {audible:false}
+chrome.tabs.onUpdated.addListener(function(tabId, audibleFalse, tab) {
+    if (!tab.audible) {
+        console.log("removing because no longer audible");
+        removeNotification(tabId); 
+    }
+});
+
+
 chrome.tabs.onActivated.addListener(function(activeInfo){
     // send notification to all audible tabs
     chrome.tabs.query({title:'*'}, function(tabs) {
@@ -27,10 +37,10 @@ chrome.tabs.onActivated.addListener(function(activeInfo){
     });
 
     // remove notification from tab we switch to
-    var tab = chrome.tabs.get(activeInfo.tabId);
-    removeNotification(tab.id); 
+    chrome.tabs.get(activeInfo.tabId, function(tab) { removeNotification(tab.id); });
     
 });
+
 
 function sendNotification(tabid) {
     chrome.tabs.sendMessage(tabid, {audible:true}, function(response) {});
