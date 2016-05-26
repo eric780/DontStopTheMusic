@@ -17,15 +17,14 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeinfo, tab) {
 */
 
 
+// remove if a tab becomes inaudible
 var audibleFalse = {audible:false}
 chrome.tabs.onUpdated.addListener(function(tabId, audibleFalse, tab) {
-    if (!tab.audible) {
-        console.log("removing because no longer audible");
-        removeNotification(tabId); 
-    }
+    removeNotification(tabId); 
 });
 
 
+// add if we switch tabs
 chrome.tabs.onActivated.addListener(function(activeInfo){
     // send notification to all audible tabs
     chrome.tabs.query({title:'*'}, function(tabs) {
@@ -38,8 +37,8 @@ chrome.tabs.onActivated.addListener(function(activeInfo){
 
     // remove notification from tab we switch to
     chrome.tabs.get(activeInfo.tabId, function(tab) { removeNotification(tab.id); });
-    
 });
+
 
 
 function sendNotification(tabid) {

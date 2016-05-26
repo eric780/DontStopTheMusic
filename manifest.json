@@ -5,7 +5,7 @@
 
 	"description": "Detects when you are closing a tab with audio playing, and warns you.",
 
-	"version": "1.0.1",
+	"version": "1.0.2",
 	
 	"background":{
 		"scripts": ["background.js"]
