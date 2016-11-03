@@ -9,7 +9,7 @@
 
   "browser_action": {
     "default_icon": {
-      "216": "icon.png"
+      "216": "music-note.png"
     },
     "default_title": "SoundLock - Click to protect this tab!"
   },
@@ -19,7 +19,7 @@
 	},
 
   "icons": {
-    "216": "icon.png"
+    "216": "music-note.png"
   },
 	"permissions":[
 		"https://ajax.googleapis.com/",
