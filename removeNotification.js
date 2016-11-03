@@ -1,4 +1,3 @@
-console.log("no longer audible");
-
-sessionStorage.removeItem('audible');
-console.log('removed');
+window.onbeforeunload = function(){ 
+  return undefined;
+}

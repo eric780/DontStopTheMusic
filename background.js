@@ -1,53 +1,35 @@
-// Copyright (c) 2014 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 /*
-var changeinfo = {audible:true}
-chrome.tabs.onUpdated.addListener(function(tabId, changeinfo, tab) {
-    if (tab.audible) {
-        console.log("tab " + tab.title + " is audible");
-        sendNotification(tab.id);
+ * We only do anything if browser extension clicked.
+ */
+chrome.browserAction.onClicked.addListener(function(tab) {
+  // add if tab is currently audible
+  if (tab.audible) {
+    sendNotification(tab.id);
+  }
+
+  // listen for tab becoming audible, then add
+  chrome.tabs.onUpdated.addListener(function(tabid, changeInfo) {
+    if (tabid == tab.id && changeInfo.audible) {
+      sendNotification(tabid);
     }
-    else if (!tab.audible || tab.active) {
-        console.log("tab " + tab.title + " no longer audible");
-        removeNotification(tab.id);
-    }
+  });
+
+  // remove if tab becomes inaudible
+  chrome.tabs.onUpdated.addListener(function(tabid, changeInfo, tab) {
+      if (tabid == tab.id && !changeInfo.audible) {
+        removeNotification(tabid);
+      }
+  });
 });
-*/
-
-
-// remove if a tab becomes inaudible
-var audibleFalse = {audible:false}
-chrome.tabs.onUpdated.addListener(function(tabId, audibleFalse, tab) {
-    removeNotification(tabId); 
-});
-
-
-// add if we switch tabs
-chrome.tabs.onActivated.addListener(function(activeInfo){
-    // send notification to all audible tabs
-    chrome.tabs.query({title:'*'}, function(tabs) {
-        for (let tab of tabs) {
-            if (tab.audible) {
-                sendNotification(tab.id);
-            }
-        }
-    });
-
-    // remove notification from tab we switch to
-    chrome.tabs.get(activeInfo.tabId, function(tab) { removeNotification(tab.id); });
-});
-
 
 
 function sendNotification(tabid) {
-    chrome.tabs.sendMessage(tabid, {audible:true}, function(response) {});
-}
-function removeNotification(tabid) {
-    chrome.tabs.sendMessage(tabid, {audible:false}, function(response) {});
+  chrome.tabs.executeScript(tabid, {"file" : "notification.js"});
 }
 
+function removeNotification(tabid) {
+  chrome.tabs.executeScript(tabid, {"file" : "removeNotification.js"});
+}
 
 /*
 // DEPRECATED 

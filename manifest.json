@@ -1,21 +1,26 @@
 {
 	"manifest_version": 2,
 
-	"name": "Don't Stop the Music",
+	"name": "SoundLock",
 
-	"description": "Detects when you are closing a tab with audio playing, and warns you.",
+	"description": "Detects when you are closing a tab with audio playing, and warns you. To use, click the extension button on the tab with music/audio.",
 
-	"version": "1.0.2",
+	"version": "1.0.4",
+
+  "browser_action": {
+    "default_icon": {
+      "216": "icon.png"
+    },
+    "default_title": "SoundLock - Click to protect this tab!"
+  },
 	
 	"background":{
 		"scripts": ["background.js"]
 	},
-	"content_scripts":[
-		{
-			"matches": ["http://*/", "https://*/", "*://*/", "<all_urls>"],
-			"js": ["contentScript.js"]
-		}
-	],
+
+  "icons": {
+    "216": "icon.png"
+  },
 	"permissions":[
 		"https://ajax.googleapis.com/",
 		"*://*/",
@@ -27,7 +32,5 @@
 		"webRequestBlocking"
 	],
 
-	"web_accessible_resources": ["notification.js", "removeNotification.js"]
-	
-
+	"web_accessible_resources": ["notification.js", "removeNotification.js", "icon.png"]
 }
